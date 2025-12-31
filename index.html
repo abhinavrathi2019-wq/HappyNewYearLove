@@ -6,81 +6,73 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Poppins',sans-serif;background:#ffb6c1;color:#000;overflow:hidden}
+body{font-family:'Poppins',sans-serif;background:linear-gradient(120deg,#ff9ebd,#ffc1d9);color:#000;overflow:hidden}
 .page{width:100vw;height:100vh;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;position:relative}
-.page.active{display:flex;animation:fade 1.5s ease}
-h1{font-family:'Great Vibes',cursive;font-size:3.5rem}
-h2{font-size:2.3rem;margin-bottom:15px}
-p{font-size:1.15rem;line-height:2;font-weight:700;max-width:1000px}
-.next-btn{position:absolute;bottom:40px;padding:18px 60px;font-size:1.3rem;font-weight:700;border:none;border-radius:60px;background:#000;color:#ffb6c1;cursor:pointer;box-shadow:0 0 30px rgba(0,0,0,0.4);animation:pulse 1.2s infinite}
-.photo{width:300px;height:300px;border-radius:30px;object-fit:cover;margin:25px;box-shadow:0 0 40px rgba(0,0,0,0.5);animation:zoom 4s infinite}
+.page.active{display:flex;animation:fadeZoom 1.3s ease}
+h1{font-family:'Great Vibes',cursive;font-size:3.6rem;animation:glow 3s infinite}
+h2{font-size:2.2rem;margin-bottom:15px}
+p{font-size:1.15rem;line-height:2.1;font-weight:700;max-width:1150px}
 
-/* Animations */
-@keyframes fade{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+.next-btn,.play-btn{padding:18px 60px;font-size:1.25rem;font-weight:700;border:none;border-radius:60px;background:#000;color:#ffb6c1;cursor:pointer;box-shadow:0 0 30px rgba(0,0,0,0.4);margin-top:20px}
+.next-btn{position:absolute;bottom:30px;animation:pulse 1.2s infinite}
+
+.photo{width:300px;height:300px;border-radius:35px;object-fit:cover;margin:20px;box-shadow:0 0 50px rgba(0,0,0,0.5);animation:float 6s ease-in-out infinite}
+
+@keyframes fadeZoom{from{opacity:0;transform:scale(0.85)}to{opacity:1;transform:scale(1)}}
 @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
-@keyframes zoom{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes glow{0%,100%{text-shadow:0 0 10px #000}50%{text-shadow:0 0 25px #000}}
 
-/* Hearts */
-.heart{position:absolute;color:red;font-size:22px;animation:fall linear infinite}
+.heart{position:absolute;color:#ff004f;font-size:24px;animation:fall linear infinite}
 @keyframes fall{0%{top:-10%;opacity:1}100%{top:110%;opacity:0}}
 
-/* Fireworks */
 .firework{position:absolute;width:6px;height:6px;background:#000;border-radius:50%;animation:explode 1.5s ease-out}
-@keyframes explode{0%{transform:scale(0);opacity:1}100%{transform:scale(18);opacity:0}}
-
-/* Pookie */
-.pookie{position:absolute;font-size:40px;animation:bounce 2s infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-
-/* Typing */
-.type{border-right:3px solid #000;white-space:nowrap;overflow:hidden;animation:typing 5s steps(40,end), blink .7s infinite}
-@keyframes typing{from{width:0}to{width:100%}}
-@keyframes blink{50%{border-color:transparent}}
+@keyframes explode{0%{transform:scale(0);opacity:1}100%{transform:scale(20);opacity:0}}
 </style>
 </head>
 <body>
 
-<audio autoplay loop>
+<audio id="bgm" loop preload="auto">
 <source src="high_on_you.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Heart rain
 for(let i=0;i<50;i++){let h=document.createElement('div');h.className='heart';h.innerHTML='❤️';h.style.left=Math.random()*100+'vw';h.style.animationDuration=4+Math.random()*4+'s';document.body.appendChild(h)}
-// Pookie emojis
-for(let i=0;i<6;i++){let p=document.createElement('div');p.className='pookie';p.innerHTML='🧸';p.style.left=Math.random()*100+'vw';p.style.top=Math.random()*100+'vh';document.body.appendChild(p)}
 </script>
 
-<!-- PAGES -->
-<div class="page active"><h1 class="type">Happy New Year Gunnu Rathi ❤️</h1><h2>From Abhinav Rathi</h2><button class="next-btn" onclick="nextPage()">Next</button></div>
+<!-- PAGE 1 -->
+<div class="page active"><h1>Happy New Year Gunnu Rathi ❤️</h1><h2>From Abhinav Rathi</h2><button class="play-btn" onclick="toggleMusic()" id="musicBtn">Play Music 🎵</button><button class="next-btn" onclick="nextPage()">Start 💖</button></div>
 
-<div class="page"><h2>My Wife My Love My Everything</h2><p>Gunnu aap meri zindagi ka woh hissa ho jahan se har khushi shuru hoti hai aur jahan par meri duniya bas jaati hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<!-- NOTE PAGES 2–14 -->
+<div class="page"><p>Gunnu aaj naye saal par main aap se dil ki baat kehna chahta hoon aap meri zindagi ka sabse khoobsurat hissa ho aap ke bina har khushi adhoori lagti hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Aap jis pyaar se mujhe samajhti ho jis tarah har haal mein mera saath deti ho wahi baat mujhe har din aap se aur zyada pyaar karna sikhaati hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Main chahta hoon ke aap hamesha apne aap par bharosa rakho kyunki aap jaisi ho wahi meri duniya ki sabse badi taqat hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Aap ke saath har sapna sach lagta hai aur har mushkil aasaan ho jaati hai kyunki aap mere saath ho</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Main vaada karta hoon ke main hamesha aap ki izzat karunga aap ki khushi ko apni pehli zimmedari banaunga</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Aap meri zindagi ki woh roshni ho jo har andhere ko khatam kar deti hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Main aap ke saath budhe hona chahta hoon aap ke saath har saal aur zyada pyaar mein padna chahta hoon</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Aap ke bina main apne future ki kalpana bhi nahi kar sakta</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Aap meri har jeet ka sabab ho aur meri har haar ka sahara ho</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Har naya saal mujhe sirf ek hi cheez aur zyada mehsoos karata hai ke main aap se bepanah pyaar karta hoon</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Gunnu aap meri zindagi ki kahani ho jisme har page par sirf mohabbat likhi hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><p>Main chahta hoon ke hum dono ka pyaar waqt ke saath aur gehra hota jaaye</p><button class="next-btn" onclick="nextPage()">Next</button></div>
 
-<div class="page"><img src="photo1.jpeg" class="photo"><p>Aap ke saath bitaya har pal meri rooh ka sabse khoobsurat ehsaas hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><p>Punjabi style pyaar Gunnu tera naam meri dhadkan ban chuka hai tera saath meri taaqat hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><img src="photo2.jpeg" class="photo"><p>Har tasveer mein meri poori duniya nazar aati hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><p>Gunnu aaj naye saal par main dil se kehna chahta hoon ke aap mere liye sirf meri wife nahi ho aap meri aadat meri dua meri zindagi ho</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><img src="photo3.jpeg" class="photo"><p>Yeh kahani har saal aur gehri hoti ja rahi hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><p>Main vaada karta hoon ke har din aap ko khush rakhne ki koshish karunga aap ke sapne mere sapne honge</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><img src="photo4.jpeg" class="photo"><p>Aap meri har jeet ka shukriya ho</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
-<div class="page"><p>Main chahta hoon ke hum dono saath saath budhe ho aur har saal yunhi ek dusre se aur zyada pyaar karein</p><button class="next-btn" onclick="nextPage()">Next</button></div>
-
+<!-- PHOTO PAGES 15–19 -->
+<div class="page"><img src="photo1.jpeg" class="photo"><p>Yeh pal meri zindagi ki sabse khoobsurat yaad hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><img src="photo2.jpeg" class="photo"><p>Aap ke saath har tasveer ek kahani sunati hai</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><img src="photo3.jpeg" class="photo"><p>Aap meri duniya ho meri jaan ho</p><button class="next-btn" onclick="nextPage()">Next</button></div>
+<div class="page"><img src="photo4.jpeg" class="photo"><p>Aap ke bina kuch bhi poora nahi lagta</p><button class="next-btn" onclick="nextPage()">Next</button></div>
 <div class="page"><img src="photo5.jpeg" class="photo"><p>Forever us always</p><button class="next-btn" onclick="nextPage()">Next</button></div>
 
-<div class="page"><h1>I Promise</h1><p>Main Abhinav Rathi aapse vaada karta hoon ke zindagi bhar aap ka saath nibhaunga har khushi har mushkil har sapne mein aap ke saath rahunga I love you Gunnu Rathi forever and always Happy New Year meri jaan</p></div>
+<!-- PAGE 20 -->
+<div class="page"><h1>I Promise 💍</h1><p>Main Abhinav Rathi aapse vaada karta hoon ke zindagi bhar aap ka saath nibhaunga har khushi har mushkil har sapne mein aap ke saath rahunga I love you Gunnu Rathi forever Happy New Year meri jaan</p></div>
 
 <script>
 let i=0;const pages=document.querySelectorAll('.page');
 function nextPage(){pages[i].classList.remove('active');i++;if(i>=pages.length)i=pages.length-1;pages[i].classList.add('active');}
-// Fireworks
-setInterval(()=>{let f=document.createElement('div');f.className='firework';f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*100+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)},800);
+function toggleMusic(){const m=document.getElementById('bgm');const b=document.getElementById('musicBtn');if(m.paused){m.play();b.innerText='Pause Music ⏸️'}else{m.pause();b.innerText='Play Music 🎵'}}
+document.body.addEventListener('click',()=>{const m=document.getElementById('bgm');if(m.paused){m.play();}}, { once:true });else{m.pause()}}
+setInterval(()=>{let f=document.createElement('div');f.className='firework';f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*100+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)},900);
 </script>
 </body>
 </html>

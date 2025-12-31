@@ -79,8 +79,19 @@ for(let i=0;i<60;i++){let h=document.createElement('div');h.className='heart';h.
 
 <script>
 let i=0;const pages=document.querySelectorAll('.page');
-function startSite(){toggleMusic();nextPage();}
-function nextPage(){pages[i].classList.remove('active');i++;if(i>=pages.length)i=pages.length-1;pages[i].classList.add('active');}
+function startSite(){
+  const m=document.getElementById('bgm');
+  if(m.paused){m.play().catch(()=>{});}
+  nextPage();
+}
+function nextPage(){
+  pages[i].classList.remove('active');
+  i++;
+  if(i>=pages.length)i=pages.length-1;
+  pages[i].classList.add('active');
+  const m=document.getElementById('bgm');
+  if(m.paused){m.play().catch(()=>{});} // keep music running
+}
 function toggleMusic(){const m=document.getElementById('bgm');const b=document.getElementById('musicBtn');if(m.paused){m.play().catch(()=>{});b.innerText='Pause Music ⏸️'}else{m.pause();b.innerText='Play Music 🎵'}}
 setInterval(()=>{let f=document.createElement('div');f.className='firework';f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*100+'vh';document.body.appendChild(f);setTimeout(()=>f.remove(),1500)},900);
 </script>
